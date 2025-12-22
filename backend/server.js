@@ -25,10 +25,20 @@ const instructorRoutes = require("./routes/instructorRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const lessonRoutes = require("./routes/lessonRoutes");
-const instructorLessonRoutes = require("./routes/instrctorLessonRoutes"); 
+const instructorLessonRoutes = require("./routes/instrctorLessonRoutes");
 const adminSettingsRoutes = require("./routes/adminSettingsRoutes");
 
-const studentRoutes = require("./routes/studentRoutes");  
+const studentRoutes = require("./routes/studentRoutes");
+
+
+
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        status: "UP",
+        message: "Server is running fine",
+        timestamp: new Date().toISOString()
+    });
+});
 
 
 app.use("/auth", authRoutes);
@@ -39,7 +49,7 @@ app.use("/admin", adminRoutes);
 app.use("/courses", courseRoutes);
 app.use("/lesson", lessonRoutes);
 app.use("/admin/settings", adminSettingsRoutes);
-app.use("/student", studentRoutes); 
+app.use("/student", studentRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
