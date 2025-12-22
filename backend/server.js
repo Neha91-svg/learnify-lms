@@ -9,41 +9,17 @@ connectDB();
 
 const app = express();
 
-/* ---------------- CORS (MUST BE FIRST) ---------------- */
+/* -------- CORS (SIMPLE) -------- */
+app.use(cors());
 
-const allowedOrigins = [
-    "http://localhost:5173",
-    "https://learnify-lms-chi.vercel.app",
-];
-
-app.use(
-    cors({
-        origin: function (origin, callback) {
-            if (!origin) return callback(null, true); // Postman / server requests
-            if (allowedOrigins.includes(origin)) {
-                return callback(null, true);
-            } else {
-                return callback(new Error("CORS not allowed"), false);
-            }
-        },
-        credentials: true,
-    })
-);
-
-// Handle preflight requests
-app.options("*", cors());
-
-/* ---------------- BODY PARSERS ---------------- */
-
+/* -------- BODY PARSERS -------- */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/* ---------------- STATIC FILES ---------------- */
-
+/* -------- STATIC FILES -------- */
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-/* ---------------- ROUTES ---------------- */
-
+/* -------- ROUTES -------- */
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const instructorRoutes = require("./routes/instructorRoutes");
@@ -54,18 +30,12 @@ const instructorLessonRoutes = require("./routes/instrctorLessonRoutes");
 const adminSettingsRoutes = require("./routes/adminSettingsRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 
-/* ---------------- HEALTH CHECK ---------------- */
-
+/* -------- HEALTH -------- */
 app.get("/health", (req, res) => {
-    res.status(200).json({
-        status: "UP",
-        message: "Server is running fine",
-        timestamp: new Date().toISOString(),
-    });
+  res.json({ status: "UP" });
 });
 
-/* ---------------- API ROUTES ---------------- */
-
+/* -------- API -------- */
 app.use("/auth", authRoutes);
 app.use("/", userRoutes);
 app.use("/instructor", instructorRoutes);
@@ -76,9 +46,8 @@ app.use("/lesson", lessonRoutes);
 app.use("/admin/settings", adminSettingsRoutes);
 app.use("/student", studentRoutes);
 
-/* ---------------- START SERVER ---------------- */
-
+/* -------- SERVER -------- */
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
-    console.log(`🚀 Server running on PORT ${PORT}`)
+  console.log(`🚀 Server running on PORT ${PORT}`)
 );
