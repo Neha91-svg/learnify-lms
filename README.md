@@ -13,6 +13,9 @@ Learnify-LMS provides a role-based platform for managing online courses:
 
 This project is designed to demonstrate **full-stack MERN development skills**, including **authentication, authorization, RESTful APIs, and database management**.
 
+In this project implemented Docker for backend containerization.Built and ran backend services inside a Docker container.
+
+
 
 ## 📌 Features
 
