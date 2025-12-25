@@ -13,7 +13,6 @@ Learnify-LMS provides a role-based platform for managing online courses:
 
 This project is designed to demonstrate **full-stack MERN development skills**, including **authentication, authorization, RESTful APIs, and database management**.
 
----
 
 ## 📌 Features
 
@@ -30,7 +29,7 @@ This project is designed to demonstrate **full-stack MERN development skills**, 
 - Browse and enroll in courses
 - Access lessons and course materials
 
----
+
 
 ## 💻 Tech Stack
 
